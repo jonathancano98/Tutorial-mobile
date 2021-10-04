@@ -1,14 +1,30 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Bienvenido  mi App   <ion-icon color="secondary" name="logo-android"></ion-icon>
+
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v3">docs</a> will be your guide.
-  </p>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Usuario</ion-label><ion-icon name="person" item-end></ion-icon>
+
+      <ion-input type="text" name="nombre" required [(ngModel)]="nombre"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label floating>Password</ion-label><ion-icon name="lock" item-end></ion-icon>
+      <ion-input type="password" name="pass" required [(ngModel)]="pass"></ion-input>
+    </ion-item>
+  
+  </ion-list>
+
+  <button (click)="Autentificar();" ion-button color="secondary" round>Login</button>
+
+
 </ion-content>
