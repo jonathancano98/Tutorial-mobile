@@ -14,14 +14,15 @@
   <ion-list>
     <ion-label>Todos</ion-label>
       <ion-checkbox [(ngModel)]="todos" color="danger"></ion-checkbox>
-    <!-- Lo que hace el ngFor es esto : let (item) of (nombre de la lista usado en .ts y asi es como se conecta) -->
-    <ion-item *ngFor="let persona of listaalumnos">
+    <!-- Lo que hace el ngFor es esto : let (item) of (nombre de la lista usado en .ts y asi es como se conecta)
+         y ademas el let i=index es para saber que checkbox seleccionamos  -->
+    <ion-item *ngFor="let persona of listaalumnos; let i=index">
       
       <ion-label>{{persona.nombre}}</ion-label>
       <ion-label><ion-badge color="secondary">{{persona.puntuacion}}</ion-badge></ion-label> 
-      <ion-checkbox [(ngModel)]="seleccionados[i]" color="secondary" [checked]="todos"></ion-checkbox> 
-    
-    </ion-item>
+      <ion-checkbox [(ngModel)]="seleccionados[i]" [checked]="todos"></ion-checkbox>
+      
+      </ion-item>
   </ion-list>
   <button (click)="Incrementar();" ion-button color="secondary" round> <ion-icon color="light" name="add-circle"></ion-icon></button>
 

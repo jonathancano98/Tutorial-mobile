@@ -18,7 +18,7 @@ export class ProfesorPage {
 
   private APIurl = "http://[::1]:3000/personas";
   lista: any[];
-  seleccionados: boolean[];
+  seleccionados: boolean[];  
   todos: boolean=false;
 
   listaalumnos: any[]=[];
@@ -34,33 +34,35 @@ export class ProfesorPage {
   
   }
 
+
   DameAlumnos() {
     this.http.get<any[]>(this.APIurl)
        .subscribe(lista =>{ 
                           this.lista = lista;
-                          console.log('Lista:',this.lista)
-                         
+                          console.log('Lista personas:',this.lista)
+                          // Para que no se me duplique
+                           this.listaalumnos=[];
                           
-       this.lista.forEach(element => {   if(element.rol === 'Alumno')
-                                              {
-                                                  this.listaalumnos.push(element);
-                                                   console.log(this.listaalumnos);
-                                              }
-                                                                       });
-
-                           // Seleccionados tendra el mismo valor que la lista que nos llega de la API y me los llena en falso
-                          this.seleccionados = Array(this.lista.length).fill(false);
+                           this.lista.forEach(element => {   
+                                           if(element.rol === 'Alumno'){this.listaalumnos.push(element);}
+                                              });
+                                            console.log('Lista alumnos:',this.listaalumnos);
+                           
+                          // Seleccionados tendra el mismo valor que la lista que nos llega de la API y me los llena en falso
+                          this.seleccionados = Array(this.listaalumnos.length).fill(false);
+                          console.log("Lista seleccionados:",this.seleccionados);
        });
 
   }
 
   Incrementar(){
-    console.log("Voy a incremenar los puntos de:");
-    console.log(this.seleccionados);
-    for (var i=0; i<this.seleccionados.length;i++){
-      if(this.seleccionados[i]){
-        this.lista[i].puntuacion++;
-        this.http.put<any>(this.APIurl + '/' + this.lista[i].nombre, this.lista[i])
+    
+    console.log("Voy a incremenar los puntos de:",this.seleccionados);
+    
+    for (var i=0; i<this.listaalumnos.length;i++){
+      if(this.seleccionados[i]){ // Con el if(this.seleccionados[i]) escojemos los que estan en true en seleccionados
+        this.listaalumnos[i].puntuacion++;
+        this.http.put<any>(this.APIurl + '/' + this.listaalumnos[i].nombre, this.listaalumnos[i])
         .subscribe(() => this.DameAlumnos());
       }
     }
