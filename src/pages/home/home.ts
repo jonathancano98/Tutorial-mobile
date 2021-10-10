@@ -12,7 +12,7 @@ export class HomePage {
 
   nombre: string;
   pass: string;
-  private APIurl = "http://[::1]:3000/personas";
+  private APIurl = "http://192.168.1.134:3000/api/Personas";
   constructor(public navCtrl: NavController,
               private http: HttpClient) {}
 
